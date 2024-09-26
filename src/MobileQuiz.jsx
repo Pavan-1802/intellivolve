@@ -64,7 +64,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
         <h1 className="text-2xl roboto-regular uppercase w-full text-[#FCA82F] text-center font-bold">
           Intellivolve
         </h1>
-        <img src="/banner.png" width={300} className="p-2" alt="" />
+        <img src="/banner.webp" width={300} className="p-2" alt="" />
         <p className="text-xl text-center text-white font-semibold">
           Self Diagnosis Tool
         </p>
