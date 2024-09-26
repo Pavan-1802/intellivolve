@@ -4,7 +4,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 1,
-        picture: "/roads.png",
+        picture: "/roads.webp",
         text: "Are we actively adjusting our goals to respond to changing customer demands or market trends?",
         options: [
           { value: "Yes", points: 3 },
@@ -14,7 +14,7 @@ export const restructuredQuestions = [
       },
       {
         id: 1,
-        picture: "/roads.png",
+        picture: "/roads.webp",
         text: "Are we actively adjusting our goals to respond to changing customer demands or market trends?",
         options: [
           { value: "Yes", points: 3 },
@@ -24,7 +24,7 @@ export const restructuredQuestions = [
       },
       {
         id: 2,
-        picture: "/roads.png",
+        picture: "/roads.webp",
         text: "Can everyone in the organization clearly explain our 3-year strategy?",
         options: [
           { value: "Yes, absolutely", points: 3 },
@@ -40,7 +40,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 3,
-        picture: "/efficiency.png",
+        picture: "/efficiency.webp",
         text: "Do we often find ourselves struggling with delays, inefficiencies, or rework in operations?",
         options: [
           { value: "Yes, a lot", points: 1 },
@@ -51,7 +51,7 @@ export const restructuredQuestions = [
       },
       {
         id: 4,
-        picture: "/efficiency.png",
+        picture: "/efficiency.webp",
         text: "Do our teams have access to the technology they need to do their jobs effectively?",
         options: [
           { value: "Yes", points: 3 },
@@ -66,7 +66,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 5,
-        picture: "/technology.png",
+        picture: "/technology.webp",
         text: "Are we using data insights to guide our decision-making processes?",
         options: [
           { value: "Yes, regularly", points: 3 },
@@ -77,7 +77,7 @@ export const restructuredQuestions = [
       },
       {
         id: 6,
-        picture: "/technology.png",
+        picture: "/technology.webp",
         text: "Do we have a plan for integrating emerging technologies (e.g., AI, cloud) to stay competitive?",
         options: [
           { value: "Yes, it's in place", points: 3 },
@@ -93,7 +93,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 7,
-        picture: "/people.png",
+        picture: "/people.webp",
         text: "Do we have a culture that encourages feedback, innovation, and change?",
         options: [
           { value: "Yes, always", points: 3 },
@@ -104,7 +104,7 @@ export const restructuredQuestions = [
       },
       {
         id: 8,
-        picture: "/people.png",
+        picture: "/people.webp",
         text: "Do our leaders and teams regularly communicate about how we can improve our ways of working?",
         options: [
           { value: "Yes, all the time", points: 3 },
