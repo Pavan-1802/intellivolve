@@ -76,11 +76,12 @@ const App = () => {
     setShowModal(false);
     setInterpretation(null);
     setQuizData(null);
+    window.location.reload()
   };
 
   return (
     <div className="flex justify-center h-screen overflow-y-hidden">
-      <div className="w-[430px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
+      <div className="w-[430px] w- sm:border-4 sm:rounded-xl border-black roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
         <MobileQuiz questions={restructuredQuestions} onSubmit={handleQuizSubmit} />
         {showModal && (
           <div className="fixed inset-0 text-xs bg-black bg-opacity-50 flex justify-center items-center">

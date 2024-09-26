@@ -60,23 +60,23 @@ const MobileQuiz = ({ questions, onSubmit }) => {
 
   const renderUserDataInputs = () => (
     <div className="gap-4 flex flex-col items-center h-full">
-      <div className="p-4 flex flex-col gap-4 bg-purple-950">
+      <div className="p-4 flex flex-col gap-4 bg-purple-950 w-full items-center">
         <h1 className="text-2xl roboto-regular uppercase w-full text-[#FCA82F] text-center font-bold">
           Intellivolve
         </h1>
-        <img src="/banner.png" className="p-2" alt="" />
+        <img src="/banner.png" width={300} className="p-2" alt="" />
         <p className="text-xl text-center text-white font-semibold">
           Self Diagnosis Tool
         </p>
       </div>
-      <div className="flex flex-col items-center w-full gap-4 px-8">
+      <div className="flex flex-col items-center w-3/4 gap-4">
         <input
           type="text"
           name="name"
           value={userData.name}
           onChange={handleUserDataChange}
           placeholder="Your Name"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-xs"
+          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="text"
@@ -84,7 +84,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.organization}
           onChange={handleUserDataChange}
           placeholder="Organization Name"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-xs"
+          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="text"
@@ -92,7 +92,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.location}
           onChange={handleUserDataChange}
           placeholder="Organization Location"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-xs"
+          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="email"
@@ -100,7 +100,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.email}
           onChange={handleUserDataChange}
           placeholder="Business Email Address"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-xs"
+          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <button
           onClick={handleNext}
