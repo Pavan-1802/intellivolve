@@ -11,7 +11,8 @@ const App = () => {
   const [quizData, setQuizData] = useState(null);
 
   const calculateTotalScore = (answers) => {
-    return restructuredQuestions.reduce((sectionTotal, section) => {
+    // Calculate the total score
+    const totalScore = restructuredQuestions.reduce((sectionTotal, section) => {
       return (
         sectionTotal +
         section.questions.reduce((questionTotal, question) => {
@@ -22,8 +23,19 @@ const App = () => {
         }, 0)
       );
     }, 0);
+  
+    // Find the points of the first question (section 0, question 0)
+    const firstQuestion = restructuredQuestions[0]?.questions[0];
+    const firstQuestionOption = firstQuestion?.options.find(
+      (option) => option.value === answers[firstQuestion?.id]
+    );
+    const firstQuestionPoints = firstQuestionOption ? firstQuestionOption.points : 0;
+    console.log(firstQuestionPoints)
+  
+    // Subtract the points of the first question from the total score
+    return totalScore - firstQuestionPoints;
   };
-
+  
   const getInterpretation = (score) => {
     return scoreRanges.find(
       (range) => score >= range.range[0] && score <= range.range[1]
@@ -44,7 +56,7 @@ const App = () => {
   }
 
   const handleQuizSubmit = (data) => {
-    const totalScore = calculateTotalScore(data.answers) - 3;
+    const totalScore = calculateTotalScore(data.answers);
     const scoreInterpretation = getInterpretation(totalScore);
     setInterpretation(scoreInterpretation);
     setQuizData(data);
@@ -53,7 +65,7 @@ const App = () => {
 
   const handleCloseModal = () => {
     if (quizData) {
-      const totalScore = calculateTotalScore(quizData.answers) - 3;
+      const totalScore = calculateTotalScore(quizData.answers);
       const allResponses = {
         ...quizData,
         totalScore,
@@ -68,7 +80,7 @@ const App = () => {
 
   return (
     <div className="flex justify-center h-screen overflow-y-hidden">
-      <div className="w-96 roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
+      <div className="w-[430px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
         <MobileQuiz questions={restructuredQuestions} onSubmit={handleQuizSubmit} />
         {showModal && (
           <div className="fixed inset-0 text-xs bg-black bg-opacity-50 flex justify-center items-center">

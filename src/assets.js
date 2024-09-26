@@ -4,7 +4,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 1,
-        picture: "/whereWeAreGoing.jpeg",
+        picture: "/roads.png",
         text: "Are we actively adjusting our goals to respond to changing customer demands or market trends?",
         options: [
           { value: "Yes", points: 3 },
@@ -14,7 +14,7 @@ export const restructuredQuestions = [
       },
       {
         id: 1,
-        picture: "/whereWeAreGoing.jpeg",
+        picture: "/roads.png",
         text: "Are we actively adjusting our goals to respond to changing customer demands or market trends?",
         options: [
           { value: "Yes", points: 3 },
@@ -24,7 +24,7 @@ export const restructuredQuestions = [
       },
       {
         id: 2,
-        picture: "/whereWeAreGoing.jpeg",
+        picture: "/roads.png",
         text: "Can everyone in the organization clearly explain our 3-year strategy?",
         options: [
           { value: "Yes, absolutely", points: 3 },
@@ -40,7 +40,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 3,
-        picture: "/efficiency.jpeg",
+        picture: "/efficiency.png",
         text: "Do we often find ourselves struggling with delays, inefficiencies, or rework in operations?",
         options: [
           { value: "Yes, a lot", points: 1 },
@@ -51,7 +51,7 @@ export const restructuredQuestions = [
       },
       {
         id: 4,
-        picture: "/efficiency.jpeg",
+        picture: "/efficiency.png",
         text: "Do our teams have access to the technology they need to do their jobs effectively?",
         options: [
           { value: "Yes", points: 3 },
@@ -93,7 +93,7 @@ export const restructuredQuestions = [
     questions: [
       {
         id: 7,
-        picture: "/people.jpeg",
+        picture: "/people.png",
         text: "Do we have a culture that encourages feedback, innovation, and change?",
         options: [
           { value: "Yes, always", points: 3 },
@@ -104,7 +104,7 @@ export const restructuredQuestions = [
       },
       {
         id: 8,
-        picture: "/people.jpeg",
+        picture: "/people.png",
         text: "Do our leaders and teams regularly communicate about how we can improve our ways of working?",
         options: [
           { value: "Yes, all the time", points: 3 },
