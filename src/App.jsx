@@ -107,7 +107,7 @@ const App = () => {
                 onClick={handleCloseModal}
                 className="bg-blue-500 text-white px-4 py-2 w-1/3 rounded hover:bg-blue-600"
               >
-                Submit and Close
+                Close
               </button>
             </div>
           </div>
