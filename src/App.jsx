@@ -6,6 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showResult, setShowResult] = useState(false); // New state for showing results
   const [interpretation, setInterpretation] = useState(null);
   const [contactUser, setContactUser] = useState(true);
   const [quizData, setQuizData] = useState(null);
@@ -16,22 +17,15 @@ const App = () => {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
-  // Use useEffect to adjust the height on mount and resize
   useEffect(() => {
     setViewportHeight(); // Set the height when the component mounts
-
-    // Update the height whenever the window is resized
     window.addEventListener('resize', setViewportHeight);
-
-    // Cleanup the event listener when the component unmounts
     return () => {
       window.removeEventListener('resize', setViewportHeight);
     };
-  }, []); // Empty dependency array ensures this runs only on mount and unmount
-
+  }, []);
 
   const calculateTotalScore = (answers) => {
-    // Calculate the total score
     const totalScore = restructuredQuestions.reduce((sectionTotal, section) => {
       return (
         sectionTotal +
@@ -44,7 +38,6 @@ const App = () => {
       );
     }, 0);
 
-    // Find the points of the first question (section 0, question 0)
     const firstQuestion = restructuredQuestions[0]?.questions[0];
     const firstQuestionOption = firstQuestion?.options.find(
       (option) => option.value === answers[firstQuestion?.id]
@@ -52,9 +45,6 @@ const App = () => {
     const firstQuestionPoints = firstQuestionOption
       ? firstQuestionOption.points
       : 0;
-    console.log(firstQuestionPoints);
-
-    // Subtract the points of the first question from the total score
     return totalScore - firstQuestionPoints;
   };
 
@@ -85,7 +75,7 @@ const App = () => {
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
+  const handleViewResult = () => {
     setLoading(true); // Start the loading spinner
     if (quizData) {
       const totalScore = calculateTotalScore(quizData.answers);
@@ -94,14 +84,19 @@ const App = () => {
         totalScore,
         interpretation,
       };
-      addData(allResponses);
+      addData(allResponses).then(() => {
+        setShowResult(true); // Show results after data is added
+        setLoading(false); // Stop the loading spinner
+      });
     }
-    setTimeout(() => {
-      setShowModal(false);
-      setInterpretation(null);
-      setQuizData(null);
-      window.location.reload(); // Refresh the browser after 3 seconds
-    }, 3000); // Set timeout for 3 seconds
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setInterpretation(null);
+    setQuizData(null);
+    setShowResult(false); // Reset the result view state
+    window.location.reload(); // Refresh the browser
   };
 
   return (
@@ -116,49 +111,59 @@ const App = () => {
         {showModal && (
           <div className="fixed inset-0 text-xs bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white flex flex-col gap-2 m-4 p-4 rounded-lg max-w-lg">
-              <h2 className="text-xl font-bold mb-4">
-                {interpretation?.title}
-              </h2>
-              <p className="mb-2">
-                <strong>Feedback:</strong> {interpretation?.feedback}
-              </p>
-              <p className="mb-4">
-                <strong>Recommendation:</strong>{" "}
-                {interpretation?.recommendation}
-              </p>
-              <p className="mb-4 italic text-gray-600">
-                Thank you for taking the time to complete this survey. Your
-                insights are valuable and will help us improve our
-                organizational strategies.
-              </p>
-              <div className="flex items-center justify-between mb-4">
-                <span>Would you like us to contact you?</span>
-                <button
-                  className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none ${
-                    contactUser ? "bg-blue-600" : "bg-gray-200"
-                  }`}
-                  onClick={() => setContactUser(!contactUser)}
-                >
-                  <span
-                    className={`inline-block w-4 h-4 transform transition ${
-                      contactUser ? "translate-x-6" : "translate-x-1"
-                    } bg-white rounded-full`}
-                  />
-                </button>
-              </div>
-              <button
-                onClick={handleCloseModal}
-                disabled={loading} // Disable the button during loading
-                className={`bg-blue-500 text-white px-4 py-2 w-1/3 rounded hover:bg-blue-600 ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {loading ? (
-                  <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full"></div>
-                ) : (
-                  "Close"
-                )}
-              </button>
+              {!showResult ? (
+                <>
+                  <div className="flex items-center gap-6 mb-4">
+                    <span className="text-lg">Would you like us to contact you?</span>
+                    <button
+                      className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none ${
+                        contactUser ? "bg-blue-600" : "bg-gray-200"
+                      }`}
+                      onClick={() => setContactUser(!contactUser)}
+                    >
+                      <span
+                        className={`inline-block w-4 h-4 transform transition ${
+                          contactUser ? "translate-x-6" : "translate-x-1"
+                        } bg-white rounded-full`}
+                      />
+                    </button>
+                  </div>
+                  <button
+                    onClick={handleViewResult}
+                    disabled={loading} // Disable the button during loading
+                    className={`bg-blue-500 text-white px-4 py-2 w-max rounded hover:bg-blue-600 ${
+                      loading ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {loading ? (
+                      <div className="spinner-border animate-spin inline-block w-4 h-4 border-2 rounded-full"></div>
+                    ) : (
+                      "View Result"
+                    )}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-xl font-bold mb-4">
+                    {interpretation?.title}
+                  </h2>
+                  <p className="mb-2">
+                    <strong>Feedback:</strong> {interpretation?.feedback}
+                  </p>
+                  <p className="mb-4">
+                    <strong>Recommendation:</strong> {interpretation?.recommendation}
+                  </p>
+                  <p className="mb-4 italic text-gray-600">
+                    Thank you for taking the time to complete this survey. Your insights are valuable and will help us improve our organizational strategies.
+                  </p>
+                  <button
+                    onClick={handleCloseModal}
+                    className="bg-blue-500 text-white px-4 py-2 w-1/3 rounded hover:bg-blue-600"
+                  >
+                    Close
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
