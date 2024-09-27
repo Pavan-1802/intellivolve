@@ -112,9 +112,9 @@ const App = () => {
           <div className="fixed inset-0 text-xs bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white flex flex-col gap-2 m-4 p-4 rounded-lg max-w-lg">
               {!showResult ? (
-                <>
+                <div className="flex flex-col items-start gap-8 py-8">
                   <div className="flex items-center gap-6 mb-4">
-                    <span className="text-lg">Would you like us to contact you?</span>
+                    <span className="text-base font-bold">Would you like us to contact you?</span>
                     <button
                       className={`relative inline-flex items-center h-6 rounded-full w-11 focus:outline-none ${
                         contactUser ? "bg-blue-600" : "bg-gray-200"
@@ -131,7 +131,7 @@ const App = () => {
                   <button
                     onClick={handleViewResult}
                     disabled={loading} // Disable the button during loading
-                    className={`bg-blue-500 text-white px-4 py-2 w-max rounded hover:bg-blue-600 ${
+                    className={`bg-blue-500 text-white text-sm px-4 py-2 w-max rounded hover:bg-blue-600 ${
                       loading ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >
@@ -141,7 +141,7 @@ const App = () => {
                       "View Result"
                     )}
                   </button>
-                </>
+                </div>
               ) : (
                 <>
                   <h2 className="text-xl font-bold mb-4">
