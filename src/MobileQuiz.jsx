@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useState, useMemo } from "react";
 import { CircleCheckBig } from "lucide-react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const MobileQuiz = ({ questions, onSubmit }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,7 +66,13 @@ const MobileQuiz = ({ questions, onSubmit }) => {
         <h1 className="text-2xl roboto-regular uppercase w-full text-[#FCA82F] text-center font-bold">
           Intellivolve
         </h1>
-        <img src="/banner.webp" width={300} className="p-2" alt="" />
+        <LazyLoadImage
+          alt=""
+          effect="blur"
+          width={288}
+          src="/banner.webp"
+          placeholderSrc="placeholder.jpg" // Optional blur-up while loading
+        />
         <p className="text-xl text-center text-white font-semibold">
           Self Diagnosis Tool
         </p>
@@ -76,7 +84,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.name}
           onChange={handleUserDataChange}
           placeholder="Your Name"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="text"
@@ -84,7 +92,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.organization}
           onChange={handleUserDataChange}
           placeholder="Organization Name"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="text"
@@ -92,7 +100,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.location}
           onChange={handleUserDataChange}
           placeholder="Organization Location"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <input
           type="email"
@@ -100,7 +108,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.email}
           onChange={handleUserDataChange}
           placeholder="Business Email Address"
-          className="w-full p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
         />
         <button
           onClick={handleNext}
@@ -115,8 +123,8 @@ const MobileQuiz = ({ questions, onSubmit }) => {
   return (
     <div className="flex flex-col justify-between h-screen rounded-xl w-full">
       {!isFirstQuestion && (
-        <div className="p-4 bg-purple-950">
-          <div className="w-full bg-gray-200 transition-all duration-1000 ease-out rounded-full h-1 ">
+        <div className="p-4 bg-purple-950 flex justify-center">
+          <div className="w-full max-w-[288px] bg-gray-200 transition-all duration-1000 ease-out rounded-full h-1 ">
             <div
               className="bg-[#FCA82F] h-1 transition-all duration-500 ease-out rounded-full"
               style={{ width: `${progress}%` }}
@@ -131,12 +139,14 @@ const MobileQuiz = ({ questions, onSubmit }) => {
       )}
       {!isFirstQuestion && (
         <div className="flex bg-purple-950 justify-center w-full">
-          <img
-            className="mt-2 mb-4"
-            src={currentQuestion.picture}
-            width={250}
-            alt="picture"
-          />
+          <LazyLoadImage
+          alt=""
+          effect="blur"
+          className="mt-2 mb-2"
+          width={250}
+          src={currentQuestion.picture}
+          placeholderSrc="placeholder.jpg" // Optional blur-up while loading
+        />
         </div>
       )}
       <div className="flex-grow">
@@ -144,16 +154,18 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           renderUserDataInputs()
         ) : (
           <>
-            <p className="text-base text-center text-white font-semibold mb-4 px-2 py-2">
-              {currentQuestion.text}
-            </p>
+            <div className="w-full flex justify-center">
+              <p className="text-base max-w-[288px] text-center text-white font-semibold mb-4 px-2 py-2">
+                {currentQuestion.text}
+              </p>
+            </div>
             <div className="flex flex-col gap-3 px-4 items-center">
               {currentQuestion.options.map((option) => {
                 const isSelected = answers[currentQuestion.id] === option.value;
                 return (
                   <button
                     key={option.value}
-                    className={`w-full py-3 text-sm px-4 text-left text-white rounded-lg shadow-lg bg-[#361757] flex items-center justify-between transition-all duration-300 ${
+                    className={`w-full max-w-[288px] py-3 text-sm px-4 text-left text-white rounded-lg shadow-lg bg-[#361757] flex items-center justify-between transition-all duration-300 ${
                       isSelected
                         ? "border-2 border-[#FDB94B]"
                         : "border-2 border-transparent"
@@ -173,37 +185,39 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           </>
         )}
       </div>
-      <div
-        className={`flex ${
-          isFirstQuestion ? "justify-center" : "justify-between"
-        }  mt-4 py-2 px-5 `}
-      >
-        <button
-          onClick={handlePrevious}
-          className={`flex text-sm rounded-full ${
-            isFirstQuestion ? "hidden" : ""
-          } items-center justify-center px-4 rounded-lg py-2 bg-[#FDB94B] text-[#361757] font-bold disabled:bg-gray-500`}
+      <div className="w-full pb-4 flex justify-center">
+        <div
+          className={`flex ${
+            isFirstQuestion ? "justify-center" : "justify-between"
+          }  mt-4 w-full max-w-[288px] mx-4`}
         >
-          Previous
-        </button>
-        {isLastQuestion ? (
           <button
-            onClick={handleSubmit}
-            disabled={!allQuestionsAnswered}
-            className="px-5 py-1 bg-green-500 rounded-lg text-white disabled:bg-gray-500 disabled:cursor-not-allowed"
+            onClick={handlePrevious}
+            className={`flex text-sm rounded-full ${
+              isFirstQuestion ? "hidden" : ""
+            } items-center justify-center px-4 rounded-lg py-2 bg-[#FDB94B] text-[#361757] font-bold disabled:bg-gray-500`}
           >
-            Submit
+            Previous
           </button>
-        ) : (
-          <button
-            onClick={handleNext}
-            className={`${
-              isFirstQuestion && "hidden"
-            } flex text-sm rounded-lg items-center justify-center px-7 py-1 bg-[#FDB94B] text-[#361757] font-bold`}
-          >
-            Next
-          </button>
-        )}
+          {isLastQuestion ? (
+            <button
+              onClick={handleSubmit}
+              disabled={!allQuestionsAnswered}
+              className="px-5 py-1 bg-green-500 rounded-lg text-white disabled:bg-gray-500 disabled:cursor-not-allowed"
+            >
+              Submit
+            </button>
+          ) : (
+            <button
+              onClick={handleNext}
+              className={`${
+                isFirstQuestion && "hidden"
+              } flex text-sm rounded-lg items-center justify-center px-7 py-1 bg-[#FDB94B] text-[#361757] font-bold`}
+            >
+              Next
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

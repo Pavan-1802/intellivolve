@@ -86,8 +86,8 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center h-screen overflow-y-hidden">
-      <div className="w-[430px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
+    <div className="flex justify-center h-screen overflow-x-hidden overflow-y-hidden">
+      <div className="w-screen sm:w-[360px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
         <MobileQuiz
           questions={restructuredQuestions}
           onSubmit={handleQuizSubmit}
