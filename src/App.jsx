@@ -112,7 +112,7 @@ const App = () => {
           <div className="fixed inset-0 text-xs bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white flex flex-col gap-2 m-4 p-4 rounded-lg max-w-lg">
               {!showResult ? (
-                <div className="flex flex-col items-start gap-8 py-8">
+                <div className="flex flex-col items-start gap-8 p">
                   <div className="flex items-center gap-6 mb-4">
                     <span className="text-base font-bold">Would you like us to contact you?</span>
                     <button
