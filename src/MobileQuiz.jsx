@@ -71,7 +71,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           effect="blur"
           width={288}
           src="/banner.webp"
-          placeholderSrc="placeholder.jpg" // Optional blur-up while loading
+          placeholderSrc="/banner.webp" // Optional blur-up while loading
         />
         <p className="text-xl text-center text-white font-semibold">
           Self Diagnosis Tool
@@ -145,7 +145,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           className="mt-2 mb-2"
           width={250}
           src={currentQuestion.picture}
-          placeholderSrc="placeholder.jpg" // Optional blur-up while loading
+          placeholderSrc={currentQuestion.picture} // Optional blur-up while loading
         />
         </div>
       )}
@@ -155,7 +155,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
         ) : (
           <>
             <div className="w-full flex justify-center">
-              <p className="text-base max-w-[288px] text-center text-white font-semibold mb-4 px-2 py-2">
+              <p className="text-base text-center text-white font-semibold mb-4 px-2 py-2">
                 {currentQuestion.text}
               </p>
             </div>

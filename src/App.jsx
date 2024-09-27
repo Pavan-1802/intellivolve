@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { restructuredQuestions, scoreRanges } from "./assets";
 import { supabase } from "../supabase";
 import MobileQuiz from "./MobileQuiz";
@@ -10,6 +10,25 @@ const App = () => {
   const [contactUser, setContactUser] = useState(true);
   const [quizData, setQuizData] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const setViewportHeight = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+
+  // Use useEffect to adjust the height on mount and resize
+  useEffect(() => {
+    setViewportHeight(); // Set the height when the component mounts
+
+    // Update the height whenever the window is resized
+    window.addEventListener('resize', setViewportHeight);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', setViewportHeight);
+    };
+  }, []); // Empty dependency array ensures this runs only on mount and unmount
+
 
   const calculateTotalScore = (answers) => {
     // Calculate the total score
@@ -86,7 +105,9 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center h-screen overflow-x-hidden overflow-y-hidden">
+    <div className="flex justify-center overflow-x-hidden overflow-y-hidden" style={{
+      height: 'calc(var(--vh, 1vh) * 100)', // Use the CSS variable for height
+    }}>
       <div className="w-screen sm:w-[360px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
         <MobileQuiz
           questions={restructuredQuestions}
