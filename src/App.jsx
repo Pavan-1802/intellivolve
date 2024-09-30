@@ -100,10 +100,10 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center overflow-x-hidden overflow-y-hidden" style={{
+    <div className="flex justify-center overflow-x-hidden overflow-y-hidden bg-[#fafafa]" style={{
       height: 'calc(var(--vh, 1vh) * 100)', // Use the CSS variable for height
     }}>
-      <div className="w-screen sm:w-[360px] roboto-regular bg-[#45206C] h-full flex flex-col items-center justify-around">
+      <div className="w-screen bg-[#fafafa] sm:w-[360px] sm:rounded-lg sm:shadow-lg h-full flex flex-col items-center justify-around">
         <MobileQuiz
           questions={restructuredQuestions}
           onSubmit={handleQuizSubmit}

@@ -61,9 +61,9 @@ const MobileQuiz = ({ questions, onSubmit }) => {
   };
 
   const renderUserDataInputs = () => (
-    <div className="gap-4 flex flex-col items-center h-full">
-      <div className="p-4 flex flex-col gap-4 bg-purple-950 w-full items-center">
-        <h1 className="text-2xl roboto-regular uppercase w-full text-[#FCA82F] text-center font-bold">
+    <div className="gap-4 flex flex-col sm:rounded-lg items-center h-full">
+      <div className="p-4 flex sm:rounded-t-lg flex-col gap-4 bg-[#fafafa] w-full items-center">
+        <h1 className="text-2xl roboto-regular uppercase w-full text-[#0F469A] text-center font-bold">
           Intellivolve
         </h1>
         <LazyLoadImage
@@ -73,7 +73,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           src="/banner.webp"
           placeholderSrc="/banner.webp" // Optional blur-up while loading
         />
-        <p className="text-xl text-center text-white font-semibold">
+        <p className="text-xl text-center text-[#0F469A] font-semibold">
           Self Diagnosis Tool
         </p>
       </div>
@@ -84,7 +84,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.name}
           onChange={handleUserDataChange}
           placeholder="Your Name"
-          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 border-2 rounded-lg text-black text-sm"
         />
         <input
           type="text"
@@ -92,7 +92,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.organization}
           onChange={handleUserDataChange}
           placeholder="Organization Name"
-          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg border-2 text-black text-sm"
         />
         <input
           type="text"
@@ -100,7 +100,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.location}
           onChange={handleUserDataChange}
           placeholder="Organization Location"
-          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg border-2 text-black text-sm"
         />
         <input
           type="email"
@@ -108,11 +108,11 @@ const MobileQuiz = ({ questions, onSubmit }) => {
           value={userData.email}
           onChange={handleUserDataChange}
           placeholder="Business Email Address"
-          className="w-full max-w-[288px] p-3 rounded-lg bg-[#361757] text-white text-base"
+          className="w-full max-w-[288px] p-3 rounded-lg border-2 text-black text-sm"
         />
         <button
           onClick={handleNext}
-          className="flex text-sm w-max rounded-lg items-center justify-center px-4 py-2 bg-[#FDB94B] text-[#361757] font-bold"
+          className="flex text-sm w-max rounded-lg items-center justify-center px-4 py-2 bg-[#0F469A] text-[#fafafa] font-bold"
         >
           Start
         </button>
@@ -121,24 +121,24 @@ const MobileQuiz = ({ questions, onSubmit }) => {
   );
 
   return (
-    <div className="flex flex-col justify-between h-screen rounded-xl w-full">
+    <div className="flex flex-col justify-between h-screen w-full">
       {!isFirstQuestion && (
-        <div className="p-4 bg-purple-950 flex justify-center">
+        <div className="p-4 bg-[#fafafa] sm:rounded-t-lg flex justify-center">
           <div className="w-full max-w-[288px] bg-gray-200 transition-all duration-1000 ease-out rounded-full h-1 ">
             <div
-              className="bg-[#FCA82F] h-1 transition-all duration-500 ease-out rounded-full"
+              className="bg-[#ffd700] h-1 transition-all duration-500 ease-out rounded-full"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
         </div>
       )}
       {!isFirstQuestion && (
-        <h2 className="text-base bg-purple-950 text-[#FDB94B] text-center font-bold w-full">
+        <h2 className="text-[17px] bg-[#fafafa] text-black text-center font-bold w-full">
           {currentQuestion.section}
         </h2>
       )}
       {!isFirstQuestion && (
-        <div className="flex bg-purple-950 justify-center w-full">
+        <div className="flex bg-[#fafafa] justify-center w-full">
           <LazyLoadImage
           alt=""
           effect="blur"
@@ -155,7 +155,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
         ) : (
           <>
             <div className="w-full flex justify-center">
-              <p className="text-base text-center text-white font-semibold mb-4 px-2 py-2">
+              <p className="text-[17px] text-center text-[#C08E00] font-semibold mb-4 px-2 py-2">
                 {currentQuestion.text}
               </p>
             </div>
@@ -165,10 +165,10 @@ const MobileQuiz = ({ questions, onSubmit }) => {
                 return (
                   <button
                     key={option.value}
-                    className={`w-full max-w-[288px] py-3 text-sm px-4 text-left text-white rounded-lg shadow-lg bg-[#361757] flex items-center justify-between transition-all duration-300 ${
+                    className={`w-full max-w-[288px] py-3 text-sm px-4 text-left font-medium rounded-lg shadow-lg  flex items-center justify-between transition-all duration-300 ${
                       isSelected
-                        ? "border-2 border-[#FDB94B]"
-                        : "border-2 border-transparent"
+                        ? "border-2 border-transparent bg-[#DCEAF7] text-[#0F469A]"
+                        : "border-2 text-black"
                     }`}
                     onClick={() =>
                       handleAnswer(currentQuestion.id, option.value)
@@ -176,7 +176,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
                   >
                     <span>{option.value}</span>
                     {isSelected && (
-                      <CircleCheckBig className="text-[#FDB94B]" size={15} />
+                      <CircleCheckBig className="text-[#0F469A]" size={15} />
                     )}
                   </button>
                 );
@@ -195,7 +195,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
             onClick={handlePrevious}
             className={`flex text-sm rounded-full ${
               isFirstQuestion ? "hidden" : ""
-            } items-center justify-center px-4 rounded-lg py-2 bg-[#FDB94B] text-[#361757] font-bold disabled:bg-gray-500`}
+            } items-center justify-center px-4 rounded-lg py-2 bg-[#0F469A] text-[#fafafa] font-medium disabled:bg-gray-500`}
           >
             Previous
           </button>
@@ -203,7 +203,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
             <button
               onClick={handleSubmit}
               disabled={!allQuestionsAnswered}
-              className="px-5 py-1 bg-green-500 rounded-lg text-white disabled:bg-gray-500 disabled:cursor-not-allowed"
+              className="px-5 py-1 text-sm bg-[#0F469A] font-medium rounded-lg text-white disabled:bg-gray-500 disabled:cursor-not-allowed"
             >
               Submit
             </button>
@@ -212,7 +212,7 @@ const MobileQuiz = ({ questions, onSubmit }) => {
               onClick={handleNext}
               className={`${
                 isFirstQuestion && "hidden"
-              } flex text-sm rounded-lg items-center justify-center px-7 py-1 bg-[#FDB94B] text-[#361757] font-bold`}
+              } flex text-sm rounded-lg items-center justify-center px-7 py-1 bg-[#0F469A] text-[#fafafa] font-medium`}
             >
               Next
             </button>
